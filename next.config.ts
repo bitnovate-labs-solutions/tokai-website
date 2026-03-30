@@ -1,7 +1,36 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/services",
+        destination: "/our-solutions",
+        permanent: true,
+      },
+      {
+        source: "/contact",
+        destination: "/address-contact",
+        permanent: false,
+      },
+    ];
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.prismic.io",
+      },
+      {
+        protocol: "https",
+        hostname: "prismic-io.s3.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "tokai.com.my",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

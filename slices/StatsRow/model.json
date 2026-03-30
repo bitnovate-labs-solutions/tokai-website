@@ -1,0 +1,27 @@
+{
+  "id": "stats_row",
+  "type": "SharedSlice",
+  "name": "StatsRow",
+  "description": "Three metrics in a ruled row",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "label": {
+          "type": "Text",
+          "config": { "label": "Label", "placeholder": "" }
+        },
+        "value": {
+          "type": "Text",
+          "config": { "label": "Value", "placeholder": "" }
+        }
+      }
+    }
+  ]
+}

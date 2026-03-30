@@ -1,0 +1,46 @@
+{
+  "id": "editorials_hero",
+  "type": "SharedSlice",
+  "name": "EditorialsHero",
+  "description": "Immersive hero for the Editorials hub (matches Company Events styling).",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": { "label": "Eyebrow", "placeholder": "Insights" }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading1"
+          }
+        },
+        "subheading": {
+          "type": "Text",
+          "config": {
+            "label": "Subheading",
+            "placeholder": "Technical editorials and design guidance"
+          }
+        },
+        "background_video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Background video URL (MP4)",
+            "placeholder": "/editorials_hero.mp4 or https://..."
+          }
+        },
+      },
+      "items": {}
+    }
+  ]
+}

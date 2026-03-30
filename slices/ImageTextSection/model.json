@@ -1,0 +1,104 @@
+{
+  "id": "image_text_section",
+  "type": "SharedSlice",
+  "name": "ImageTextSection",
+  "description": "Two-column image + rich text section (used for About us / CSR-aligned layouts).",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": { "label": "Eyebrow (optional)", "placeholder": "" }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": { "width": 2400, "height": 2400 },
+            "thumbnails": []
+          }
+        },
+        "video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Video URL (optional MP4)",
+            "placeholder": "/mrt_section.mp4"
+          }
+        },
+        "image_caption": {
+          "type": "Text",
+          "config": {
+            "label": "Caption below image (optional)",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "full_width_video",
+      "name": "Full width video + glass card",
+      "docURL": "",
+      "version": "initial",
+      "description": "Edge-to-edge video background with frosted glass content card.",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": { "label": "Eyebrow (optional)", "placeholder": "" }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        },
+        "video_url": {
+          "type": "Text",
+          "config": {
+            "label": "Video URL (MP4)",
+            "placeholder": "/mrt_section.mp4"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
+

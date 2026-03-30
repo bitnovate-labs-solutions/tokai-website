@@ -1,0 +1,32 @@
+{
+  "id": "project_gallery",
+  "type": "SharedSlice",
+  "name": "ProjectGallery",
+  "description": "Masonry gallery grouped by section title",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "section_title": {
+          "type": "Text",
+          "config": { "label": "Section title", "placeholder": "MRT Bukit Bintang" }
+        },
+        "image_url": {
+          "type": "Text",
+          "config": { "label": "Image URL", "placeholder": "https://..." }
+        },
+        "image_alt": {
+          "type": "Text",
+          "config": { "label": "Alt text", "placeholder": "" }
+        }
+      }
+    }
+  ]
+}
+

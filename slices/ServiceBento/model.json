@@ -1,0 +1,62 @@
+{
+  "id": "service_bento",
+  "type": "SharedSlice",
+  "name": "ServiceBento",
+  "description": "Asymmetric 3-tile services grid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Section heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading1"
+          }
+        },
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Intro",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        }
+      },
+      "items": {
+        "title": {
+          "type": "Text",
+          "config": { "label": "Title", "placeholder": "" }
+        },
+        "description": {
+          "type": "Text",
+          "config": { "label": "Description", "placeholder": "" }
+        },
+        "icon": {
+          "type": "Select",
+          "config": {
+            "label": "Icon",
+            "placeholder": "",
+            "options": ["lightning", "shield", "sun"]
+          }
+        },
+        "accent": {
+          "type": "Select",
+          "config": {
+            "label": "Accent ring",
+            "placeholder": "",
+            "options": ["amber", "slate"]
+          }
+        }
+      }
+    }
+  ]
+}

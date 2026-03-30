@@ -1,0 +1,43 @@
+{
+  "id": "editorial_article_body",
+  "type": "SharedSlice",
+  "name": "EditorialArticleBody",
+  "description": "Long-form editorial prose (no card chrome). Stack multiple slices with Editorial article table for figures.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "intro": {
+          "type": "Text",
+          "config": {
+            "label": "Lead / dek (optional)",
+            "placeholder": "Shown once at top of this block"
+          }
+        }
+      },
+      "items": {
+        "section_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Section heading (optional)",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        }
+      }
+    }
+  ]
+}

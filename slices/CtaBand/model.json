@@ -1,0 +1,56 @@
+{
+  "id": "cta_band",
+  "type": "SharedSlice",
+  "name": "CtaBand",
+  "description": "Dark CTA band with nested shell",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading1"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "cta_label": {
+          "type": "Text",
+          "config": { "label": "CTA label", "placeholder": "" }
+        },
+        "cta_href": {
+          "type": "Text",
+          "config": {
+            "label": "CTA path or URL",
+            "placeholder": "/contact"
+          }
+        },
+        "aside_image": {
+          "type": "Image",
+          "config": {
+            "label": "Aside image (optional)",
+            "constraint": { "width": 800, "height": 800 },
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

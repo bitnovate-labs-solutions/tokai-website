@@ -1,0 +1,38 @@
+{
+  "id": "csr_article_gallery",
+  "type": "SharedSlice",
+  "name": "CsrArticleGallery",
+  "description": "Click-to-zoom image grid for the article.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "gallery_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Gallery heading",
+            "placeholder": "Picture Gallery"
+          }
+        }
+      },
+      "items": {
+        "image_url": {
+          "type": "Text",
+          "config": {
+            "label": "Image URL",
+            "placeholder": "https://..."
+          }
+        },
+        "image_alt": {
+          "type": "Text",
+          "config": { "label": "Alt text", "placeholder": "" }
+        }
+      }
+    }
+  ]
+}

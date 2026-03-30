@@ -1,0 +1,56 @@
+{
+  "id": "editorial_article_table",
+  "type": "SharedSlice",
+  "name": "EditorialArticleTable",
+  "description": "Two-column data table for specifications (optional section title and column headers).",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "section_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Section heading above table (optional)",
+            "placeholder": "e.g. 2. Surge Protection Device (SPD)"
+          }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "Table caption (optional)",
+            "placeholder": "Screen readers / small print under table"
+          }
+        },
+        "column_one_header": {
+          "type": "Text",
+          "config": {
+            "label": "First column header",
+            "placeholder": "Parameter"
+          }
+        },
+        "column_two_header": {
+          "type": "Text",
+          "config": {
+            "label": "Second column header",
+            "placeholder": "Value"
+          }
+        }
+      },
+      "items": {
+        "cell_one": {
+          "type": "Text",
+          "config": { "label": "Column 1 cell", "placeholder": "" }
+        },
+        "cell_two": {
+          "type": "Text",
+          "config": { "label": "Column 2 cell", "placeholder": "" }
+        }
+      }
+    }
+  ]
+}

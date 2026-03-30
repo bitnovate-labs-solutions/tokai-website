@@ -1,0 +1,61 @@
+{
+  "id": "company_events_media",
+  "type": "SharedSlice",
+  "name": "CompanyEventsMedia",
+  "description": "External media coverage cards (outbound links). Managed in Prismic.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "section_label": {
+          "type": "Text",
+          "config": { "label": "Eyebrow label", "placeholder": "Media" }
+        },
+        "section_heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Section heading",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "section_intro": {
+          "type": "Text",
+          "config": {
+            "label": "Intro",
+            "placeholder": "Lightning and security related news…"
+          }
+        }
+      },
+      "items": {
+        "blurb": {
+          "type": "Text",
+          "config": { "label": "Summary + outlet", "placeholder": "" }
+        },
+        "external_url": {
+          "type": "Text",
+          "config": {
+            "label": "Article URL",
+            "placeholder": "https://..."
+          }
+        },
+        "thumbnail_url": {
+          "type": "Text",
+          "config": {
+            "label": "Thumbnail URL",
+            "placeholder": "https://..."
+          }
+        },
+        "thumbnail_alt": {
+          "type": "Text",
+          "config": { "label": "Thumbnail alt", "placeholder": "" }
+        }
+      }
+    }
+  ]
+}

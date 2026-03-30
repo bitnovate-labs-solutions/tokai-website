@@ -1,0 +1,38 @@
+{
+  "id": "editorial_article_gallery",
+  "type": "SharedSlice",
+  "name": "EditorialArticleGallery",
+  "description": "Stacked product/images for long-form editorials (click to enlarge).",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "gallery_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Section heading",
+            "placeholder": "Product images"
+          }
+        }
+      },
+      "items": {
+        "image_url": {
+          "type": "Text",
+          "config": {
+            "label": "Image URL",
+            "placeholder": "https://..."
+          }
+        },
+        "image_alt": {
+          "type": "Text",
+          "config": { "label": "Alt text", "placeholder": "" }
+        }
+      }
+    }
+  ]
+}

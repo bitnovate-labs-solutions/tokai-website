@@ -1,0 +1,53 @@
+{
+  "id": "solution_parallax",
+  "type": "SharedSlice",
+  "name": "SolutionParallax",
+  "description": "Sticky full-viewport solution panels (Our Solutions overview).",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": { "width": 1200, "height": 400 },
+            "thumbnails": []
+          }
+        },
+        "cta_label": {
+          "type": "Text",
+          "config": { "label": "CTA label", "placeholder": "Learn more" }
+        },
+        "cta_href": {
+          "type": "Text",
+          "config": { "label": "CTA path", "placeholder": "/elp-solutions" }
+        }
+      }
+    }
+  ]
+}

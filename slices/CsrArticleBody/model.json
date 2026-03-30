@@ -1,0 +1,43 @@
+{
+  "id": "csr_article_body",
+  "type": "SharedSlice",
+  "name": "CsrArticleBody",
+  "description": "Article sections (optional heading + rich body per block). Reorder in Prismic.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "intro": {
+          "type": "Text",
+          "config": {
+            "label": "Optional lead paragraph",
+            "placeholder": "Shown above all sections"
+          }
+        }
+      },
+      "items": {
+        "section_heading": {
+          "type": "Text",
+          "config": {
+            "label": "Section heading (optional)",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        }
+      }
+    }
+  ]
+}

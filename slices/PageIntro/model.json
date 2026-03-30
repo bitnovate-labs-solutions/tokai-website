@@ -1,0 +1,49 @@
+{
+  "id": "page_intro",
+  "type": "SharedSlice",
+  "name": "PageIntro",
+  "description": "Inner page title band (no hero image)",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": { "label": "Eyebrow", "placeholder": "Solutions" }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": false,
+            "single": "heading1"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Intro",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        },
+        "cta_label": {
+          "type": "Text",
+          "config": { "label": "Optional CTA label", "placeholder": "" }
+        },
+        "cta_href": {
+          "type": "Text",
+          "config": { "label": "Optional CTA path or URL", "placeholder": "" }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

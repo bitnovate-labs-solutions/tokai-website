@@ -1,0 +1,81 @@
+{
+  "id": "company_events_stories",
+  "type": "SharedSlice",
+  "name": "CompanyEventsStories",
+  "description": "Press / CSR story cards linking to internal pages. Reorder or add rows in Prismic.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "section_label": {
+          "type": "Text",
+          "config": {
+            "label": "Section label",
+            "placeholder": "Press & community"
+          }
+        },
+        "section_heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Section heading",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "section_intro": {
+          "type": "Text",
+          "config": {
+            "label": "Optional intro line",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {
+        "card_title": {
+          "type": "Text",
+          "config": {
+            "label": "Card title",
+            "placeholder": "Short headline — shown prominently on the card"
+          }
+        },
+        "excerpt": {
+          "type": "Text",
+          "config": {
+            "label": "Excerpt (body under title)",
+            "placeholder": ""
+          }
+        },
+        "read_more_path": {
+          "type": "Text",
+          "config": {
+            "label": "Read more path",
+            "placeholder": "/csr_ambulance"
+          }
+        },
+        "thumbnail_url": {
+          "type": "Text",
+          "config": {
+            "label": "Thumbnail URL",
+            "placeholder": "https://..."
+          }
+        },
+        "thumbnail_alt": {
+          "type": "Text",
+          "config": { "label": "Thumbnail alt", "placeholder": "" }
+        },
+        "badge": {
+          "type": "Text",
+          "config": {
+            "label": "Optional badge",
+            "placeholder": "CSR · 2022"
+          }
+        }
+      }
+    }
+  ]
+}
