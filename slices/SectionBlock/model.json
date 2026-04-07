@@ -40,7 +40,26 @@
       "version": "initial",
       "description": "Two-column grid of bordered cards (e.g. E&LP risk copy).",
       "imageUrl": "",
-      "primary": {},
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Section heading (optional)",
+            "placeholder": "Title above the card grid",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Section intro (optional)",
+            "placeholder": "Intro copy above the cards",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        }
+      },
       "items": {
         "heading": {
           "type": "StructuredText",

@@ -251,40 +251,6 @@ const pages: Record<string, Omit<PagePayload, "slices"> & { slices: unknown[] }>
         ctaBand("wx-cta"),
       ],
     },
-    "risk-assessment": {
-      metaTitle: "Lightning Audit — Tokai",
-      metaDescription:
-        "Lightning audit and risk assessment aligned to MS IEC 62305-2.",
-      slices: [
-        intro(
-          "ra-intro",
-          "Compliance",
-          "Lightning audit compliance to MS IEC 62305-2",
-          "Lightning is a major threat to life, animals, and property. Where there is threat, risk must be mitigated—or damage and losses follow. The growth of high-rise construction has multiplied exposure. In 2007 Malaysia adopted IEC 62305 as Malaysian Standard (MS IEC 62305), replacing BS 6651:1999 for protection of structures against lightning.",
-        ),
-        section(
-          "ra-parts",
-          "MS IEC 62305 structure",
-          "MS IEC 62305 has four parts: Part 1 general principles; Part 2 risk assessment; Part 3 protection of structures and life hazards; Part 4 protection of electrical and electronic systems within structures.",
-        ),
-        section(
-          "ra-sources",
-          "Sources of damage",
-          "Lightning threat is commonly described in terms of sources S1–S4: strike to the structure; strike near the structure; strike to a service; strike near a service.",
-        ),
-        section(
-          "ra-damages",
-          "Damages and losses",
-          "Three damage types are considered: injury or death; physical damage to the structure; failure of electrical and electronic equipment. These must be controlled within tolerable levels to minimise loss of human life, loss of essential public services where applicable, loss of cultural heritage where applicable, and economic loss.",
-        ),
-        section(
-          "ra-software",
-          "Risk assessment software",
-          "Tokai’s risk assessment software helps determine whether calculated risk exceeds tolerable limits for factors such as loss of domain and economic loss. Protection techniques—including lightning protection levels LPL I–IV, coordinated SPD protection, fire protection, soil equipotentialisation, warning notices, physical restriction, and electrical insulation—can be combined to reach an economical, adequate design without over- or under-design.",
-        ),
-        ctaBand("ra-cta"),
-      ],
-    },
     "elp-solutions": {
       metaTitle: "Earthing & Lightning Protection — Tokai",
       metaDescription:
@@ -864,18 +830,278 @@ const pages: Record<string, Omit<PagePayload, "slices"> & { slices: unknown[] }>
       ],
     },
     "tokai-bollards-security-system": {
-      metaTitle: "Security Bollards — Tokai",
+      metaTitle: "Tokai Security Bollards — Tokai",
       metaDescription:
-        "High-security bollards and integrated solutions against terrorism threats.",
+        "Tokai AOH-501-1000 automatic bollards: M30/K4 impact rating, stainless or Q235 construction, fast-rise operation — download the catalogue.",
       slices: [
-        intro(
-          "bol-intro",
-          "Security",
-          "Security bollards",
-          "Tokai provides solutions to protect assets and infrastructure from terrorism threats.",
-          "Integrated security offerings also include perimeter systems, access control, and planning support for sensitive facilities.",
-        ),
+        {
+          slice_type: "editorials_hero",
+          id: "bol-hero",
+          variation: "default",
+          version: "initial",
+          primary: {
+            eyebrow: "Security",
+            heading: h1("Tokai Security Bollards"),
+            subheading:
+              "Introducing Tokai’s latest range of security solutions, the automatic bollards AOH-501-1000 which elevates your infrastructure security to the next level!",
+            background_video_url: "/bollards_hero.mp4",
+          },
+          items: [],
+        },
+        {
+          slice_type: "section_block",
+          id: "bol-overview",
+          variation: "pair_cards",
+          version: "initial",
+          primary: {},
+          items: [
+            {
+              heading: h2("Product overview"),
+              body: richJoin(
+                paragraph(
+                  "Tokai AOH-501-1000 are designed and manufactured according to 7,200kg/48KmH (M30/K4/640 kilo-joule) security impact rating standard. Cylinder material is 304/316 stainless steel or Q235 steel with RAL color powder coated for customer selections. Intercept height 800mm, diameter 271mm/273mm (sleeved) and thickness 10mm with 4–6s fast rising speed.",
+                ),
+                paragraph(
+                  "Automatic rising bollard is suitable for high-frequency, high security vehicle access sites—especially for government buildings, airports, military bases, nuclear power stations, and similar facilities.",
+                ),
+              ),
+            },
+          ],
+        },
+        {
+          slice_type: "image_text_section",
+          id: "bol-catalogue",
+          variation: "default",
+          version: "initial",
+          primary: {
+            eyebrow: "",
+            heading: h2("Download catalogue"),
+            body: richJoin(
+              paragraph("Download our Automatic Bollards catalogue here."),
+              paragraphWithWebLink(
+                "",
+                "AOH-501-1000 catalogue (PDF)",
+                "",
+                "/tokai-bollards-security-system/AOH-501-1000.pdf",
+              ),
+            ),
+            image: {
+              url: "/tokai-bollards-security-system/bollards_top.jpg",
+              alt: "Tokai AOH-501-1000 automatic bollards",
+            },
+          },
+          items: [],
+        },
+        {
+          slice_type: "image_text_section",
+          id: "bol-integrated",
+          variation: "full_width_video",
+          version: "initial",
+          primary: {
+            eyebrow: "Security",
+            heading: h2("Integrated security engineering solutions"),
+            body: richJoin(
+              paragraph(
+                "In addition to Tokai’s very own crash-impact tested bollards and surface guards that act as vehicle guidance and pedestrian control, Tokai also provides a complete list of integrated security engineering systems and solutions. These include:",
+              ),
+              bulletList([
+                "Perimeter fortification",
+                "Vehicle monitoring",
+                "Complete IP video system",
+                "Control and command centre",
+                "Electronic and surge protection",
+              ]),
+              paragraphWithWebLink(
+                "To learn more about Tokai’s integrated security engineering solutions, ",
+                "click here",
+                ".",
+                "/tissam",
+              ),
+            ),
+            video_url: "/bollards_hero.mp4",
+          },
+          items: [],
+        },
+        {
+          slice_type: "section_block",
+          id: "bol-system",
+          variation: "default",
+          version: "initial",
+          primary: {
+            heading: h2("Complete automatic bollard system"),
+            body: bulletList([
+              "Automatic bollards series stainless steel 304/316",
+              "Q235 steel with RAL color powder coated",
+              "Kit head with LED lamp band",
+              "One kit for each bollard",
+              "Remote radio receiver as optional",
+              "PLC controller with provision of open source protocol",
+            ]),
+          },
+          items: [],
+        },
         ctaBand("bol-cta"),
+      ],
+    },
+    "tissam": {
+      metaTitle: "Integrated Security Solutions — Tokai",
+      metaDescription:
+        "Total integrated safety, security & management solutions for critical infrastructure—perimeter fortification, monitoring, IP video, and global partner technologies.",
+      slices: [
+        {
+          slice_type: "editorials_hero",
+          id: "tiss-hero",
+          variation: "default",
+          version: "initial",
+          primary: {
+            eyebrow: "Security",
+            heading: h1("Integrated Security Solutions"),
+            subheading:
+              "Total Integrated Safety, Security & Management Solutions.",
+            background_video_url: "/bollards_hero.mp4",
+          },
+          items: [],
+        },
+        {
+          slice_type: "section_block",
+          id: "tiss-terror",
+          variation: "pair_cards",
+          version: "initial",
+          primary: {},
+          items: [
+            {
+              heading: h2("Terrorism on the rise"),
+              body: richJoin(
+                paragraph(
+                  "The worldwide threat of terrorism has challenged Tokai to prepare for previously unthinkable situations that may threaten the security of the critical infrastructures of the nation—which include oil & gas and national infrastructures. Regardless of socio-political considerations, acts of terrorism have spread in frequency and intensity on a global scale.",
+                ),
+                paragraph(
+                  "Effort and action must be taken to protect the people, assets and operations of our critical infrastructures to ensure Malaysia remains a peaceful, stable and prosperous nation.",
+                ),
+              ),
+            },
+          ],
+        },
+        {
+          slice_type: "section_block",
+          id: "tiss-mission",
+          variation: "pair_cards",
+          version: "initial",
+          primary: {
+            heading: h2("Mission Objectives"),
+            body: paragraph(
+              "Strategic commitments for protecting people, assets, and national critical infrastructure.",
+            ),
+          },
+          items: [
+            {
+              heading: h2("To protect"),
+              body: paragraph(
+                "To protect people, assets and operations from the threat of malicious attacks as well as lightning strikes.",
+              ),
+            },
+            {
+              heading: h2("To provide"),
+              body: paragraph(
+                "To provide real-time security monitoring and management systems.",
+              ),
+            },
+            {
+              heading: h2("To utilize"),
+              body: paragraph(
+                "To utilize state-of-the-art amalgamated security engineering solutions to protect and harden all critical infrastructures of the nation.",
+              ),
+            },
+            {
+              heading: h2("To enhance"),
+              body: paragraph(
+                "To enhance security monitoring and facilitate crisis management solutions.",
+              ),
+            },
+          ],
+        },
+        {
+          slice_type: "image_text_section",
+          id: "tiss-flow",
+          variation: "default",
+          version: "initial",
+          primary: {
+            eyebrow: "",
+            heading: h2(""),
+            body: paragraph(""),
+            image: {
+              url: "/tissam/tissam_flowchart.png",
+              alt: "Integrated and real-time security system — from first point of contact",
+            },
+          },
+          items: [],
+        },
+        {
+          slice_type: "image_text_section",
+          id: "tiss-project",
+          variation: "default",
+          version: "initial",
+          primary: {
+            eyebrow: "References",
+            heading: h2("Project reference"),
+            body: richJoin(
+              paragraph(
+                "Tokai’s Integrated Security Solutions are deployed in the heart of Putrajaya—from the official residence of our Prime Minister to the Prime Minister’s Office and Prime Minister’s Department. Our solutions also protect the central banking infrastructure of the nation.",
+              ),
+              paragraph(
+                "Tokai’s state-of-the-art Integrated Security Solutions are backed by strategic global partners who are leaders in their respective fields:",
+              ),
+            ),
+            image: {
+              url: "/tissam/tissam_project.jpg",
+              alt: "Tokai integrated security deployments",
+            },
+          },
+          items: [],
+        },
+        {
+          slice_type: "section_block",
+          id: "tiss-partners",
+          variation: "pair_cards",
+          version: "initial",
+          primary: {},
+          items: [
+            {
+              heading: h2("ATG-ACCESS"),
+              body: paragraph(
+                "United Kingdom’s leading provider of static, manual, automatic rising bollards and surface guards.",
+              ),
+              card_image: {
+                url: "/tissam/tissam_atg.jpg",
+                alt: "ATG-ACCESS",
+                dimensions: { width: 450, height: 302 },
+              },
+            },
+            {
+              heading: h2("Senstar"),
+              body: paragraph(
+                "The world’s leading supplier of outdoor perimeter detection sensors and systems, based in Canada.",
+              ),
+              card_image: {
+                url: "/tissam/tissam_senstar.jpg",
+                alt: "Senstar",
+                dimensions: { width: 450, height: 302 },
+              },
+            },
+            {
+              heading: h2("Indigo Vision"),
+              body: paragraph(
+                "The global leader and specialist in IP video security systems.",
+              ),
+              card_image: {
+                url: "/tissam/tissam_indigo.jpg",
+                alt: "Indigo Vision",
+                dimensions: { width: 450, height: 302 },
+              },
+            },
+          ],
+        },
+        ctaBand("tiss-cta"),
       ],
     },
     "address-contact": {

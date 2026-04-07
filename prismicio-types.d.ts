@@ -1880,6 +1880,31 @@ export interface SectionBlockSlicePairCardsItem {
 }
 
 /**
+ * Primary content in *SectionBlock → Pair cards → Primary*
+ */
+export interface SectionBlockSlicePairCardsPrimary {
+  /**
+   * Section heading (optional) field in *SectionBlock → Pair cards → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section_block.pair_cards.primary.heading
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  heading?: prismic.RichTextField;
+
+  /**
+   * Section intro (optional) field in *SectionBlock → Pair cards → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: section_block.pair_cards.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body?: prismic.RichTextField;
+}
+
+/**
  * Pair cards variation for SectionBlock Slice
  *
  * - **API ID**: `pair_cards`
@@ -1888,7 +1913,7 @@ export interface SectionBlockSlicePairCardsItem {
  */
 export type SectionBlockSlicePairCards = prismic.SharedSliceVariation<
   "pair_cards",
-  Record<string, never>,
+  Simplify<SectionBlockSlicePairCardsPrimary>,
   Simplify<SectionBlockSlicePairCardsItem>
 >;
 
@@ -2315,6 +2340,7 @@ declare module "@prismicio/client" {
       SectionBlockSlice,
       SectionBlockSliceDefaultPrimary,
       SectionBlockSlicePairCardsItem,
+      SectionBlockSlicePairCardsPrimary,
       SectionBlockSliceVariation,
       SectionBlockSliceDefault,
       SectionBlockSlicePairCards,

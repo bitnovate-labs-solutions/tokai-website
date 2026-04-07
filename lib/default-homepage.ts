@@ -83,19 +83,6 @@ export const defaultHomepageSlices = [
   },
   {
     slice_type: "text_section" as const,
-    id: "tokai-audit",
-    variation: "default" as const,
-    version: "initial" as const,
-    primary: {
-      heading: h1("Lightning audit for commercial and residential assets."),
-      body: paragraph(
-        "Malaysia adopted IEC 62305 as Malaysian Standard (MS IEC 62305), replacing BS 6651:1999. Tokai provides lightning audits including on-site review of earth termination networks, structural lightning protection, equipment and electrical earthing, and static discharge applications. Findings are analysed against governing standards; the risk assessment recommends measures to mitigate strike threat, with follow-up monitoring and testing to confirm system integrity.",
-      ),
-    },
-    items: [],
-  },
-  {
-    slice_type: "text_section" as const,
     id: "tokai-history",
     variation: "default" as const,
     version: "initial" as const,

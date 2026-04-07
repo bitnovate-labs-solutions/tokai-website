@@ -1,24 +1,20 @@
 import type { Metadata } from "next";
 
-import { PrismicSliceZone } from "@/components/prismic-slice-zone";
+import { HomeRevamp } from "@/components/home/home-revamp";
 import { SiteChrome } from "@/components/site-chrome";
-import {
-  defaultHomepageMeta,
-  defaultHomepageSlices,
-} from "@/lib/default-homepage";
 
-/** Homepage is authored in code (`lib/default-homepage.ts`), not loaded from Prismic. */
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: defaultHomepageMeta.title,
-  description: defaultHomepageMeta.description,
+  title: "Tokai | Engineering Built to Protect",
+  description:
+    "Tokai Engineering: MS IEC 62305 lightning protection, security engineering, and solar solutions for Malaysia’s critical infrastructure since 1993.",
 };
 
 export default function HomePage() {
   return (
     <SiteChrome>
-      <PrismicSliceZone slices={defaultHomepageSlices} />
+      <HomeRevamp />
     </SiteChrome>
   );
 }

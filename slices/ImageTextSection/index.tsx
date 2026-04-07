@@ -280,6 +280,30 @@ export default function ImageTextSection({
       ? "py-14 md:py-20"
       : tightStackPadding ?? "py-24 md:py-40";
 
+  /** TISSAM flowchart: matches legacy Divi `et_pb_section_2` on tokai.com.my/tissam/ (navy → cyan band). */
+  if (sliceId === "tiss-flow" && resolvedImgUrl) {
+    return (
+      <section
+        className="relative w-full overflow-hidden py-12 md:py-16"
+        style={{
+          backgroundImage: "linear-gradient(80deg, #17174c 16%, #1cc3eb 100%)",
+        }}
+      >
+        <div className="mx-auto max-w-[1400px] px-4 md:px-8">
+          <Image
+            src={resolvedImgUrl}
+            alt={img?.alt ?? "Integrated and real-time security system diagram"}
+            width={1500}
+            height={866}
+            className="mx-auto block h-auto w-full max-w-full"
+            sizes="(max-width: 1400px) 100vw, 1400px"
+            priority={false}
+          />
+        </div>
+      </section>
+    );
+  }
+
   if (variation === "full_width_video" && videoSrc) {
     return (
       <section className="relative isolate min-h-[min(78vh,880px)] w-full overflow-hidden bg-zinc-950">
@@ -308,7 +332,7 @@ export default function ImageTextSection({
             className="w-full max-w-xl rounded-[2rem] border border-white/25 bg-white/12 p-8 shadow-[0_24px_80px_-20px_rgba(0,0,0,0.55)] backdrop-blur-2xl ring-1 ring-white/10 md:max-w-2xl md:p-11 lg:max-w-3xl lg:p-12"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, amount: 0.01, margin: "0px" }}
             transition={{
               type: "spring" as const,
               stiffness: 120,
@@ -337,7 +361,7 @@ export default function ImageTextSection({
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            viewport={{ once: true, amount: 0.01, margin: "0px" }}
             transition={{
               type: "spring" as const,
               stiffness: 120,
@@ -480,7 +504,7 @@ export default function ImageTextSection({
             className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12"
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-12% 0px" }}
+            viewport={{ once: true, amount: 0.01, margin: "0px" }}
             variants={aboutTrioGridVariants}
           >
             <motion.div className="lg:col-span-5" variants={aboutTrioLeftStackVariants}>
@@ -599,7 +623,7 @@ export default function ImageTextSection({
                     className="space-y-2.5 md:space-y-3"
                     initial="hidden"
                     whileInView="show"
-                    viewport={{ once: true, margin: "-10% 0px" }}
+                    viewport={{ once: true, amount: 0.01, margin: "0px" }}
                     variants={{
                       hidden: {},
                       show: {

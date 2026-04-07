@@ -2,6 +2,7 @@ import { PrismicPreview } from "@prismicio/next";
 import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 
+import { NavigationCacheRefresh } from "@/components/navigation-cache-refresh";
 import { isPrismicConfigured, repositoryName } from "@/lib/prismicio";
 
 import "./globals.css";
@@ -44,6 +45,7 @@ export default function RootLayout({
       className={`${outfit.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-[#f7f6f3] text-zinc-950">
+        <NavigationCacheRefresh />
         {content}
       </body>
     </html>

@@ -38,7 +38,8 @@ export default function EditorialsHero({ slice }: SliceComponentProps) {
   const compactFooter =
     sliceId === "os-hero" ||
     sliceId === "elp-hero" ||
-    sliceId === "elps-hero";
+    sliceId === "elps-hero" ||
+    sliceId === "tiss-hero";
 
   return (
     <section className="relative min-h-[min(88vh,920px)] overflow-hidden bg-zinc-950 text-white">

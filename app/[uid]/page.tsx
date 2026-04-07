@@ -16,6 +16,7 @@ type Props = {
 };
 
 const UIDS_WITH_DEDICATED_APP_ROUTES = new Set([
+  "address-contact",
   "company-events",
   "editorials",
   ...CSR_ARTICLE_UIDS,
@@ -48,7 +49,7 @@ export default async function DynamicPage({ params }: Props) {
 
   return (
     <SiteChrome>
-      <PrismicSliceZone slices={page.slices} />
+      <PrismicSliceZone key={uid} slices={page.slices} />
     </SiteChrome>
   );
 }

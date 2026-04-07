@@ -49,10 +49,9 @@ export const navEntries: NavEntry[] = [
       { href: "/esp-solutions", label: "Electronic surge protection (ESP)" },
       { href: "/solar-solutions", label: "Solar solutions" },
       { href: "/tokai-wxline-lws", label: "Tokai-WXLine" },
-      { href: "/risk-assessment", label: "Lightning audit" },
       {
         href: "/tokai-bollards-security-system",
-        label: "Security bollards",
+        label: "Tokai Security Bollards",
       },
     ],
   },

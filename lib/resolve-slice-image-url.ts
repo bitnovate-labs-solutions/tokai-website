@@ -11,8 +11,27 @@ export function resolveSliceImageUrl(
     mapTokaiAboutUsImageUrl(url) ??
     mapTokaiElpImageUrl(url) ??
     mapTokaiElpServicesImageUrl(url) ??
+    mapTokaiTissamImageUrl(url) ??
     url
   );
+}
+
+/** Legacy tokai.com.my TISSAM page assets → local `/tissam/*` (for Prismic image fields). */
+function mapTokaiTissamImageUrl(url: string): string | undefined {
+  try {
+    const u = new URL(url);
+    if (u.hostname.replace(/^www\./, "") !== "tokai.com.my") return undefined;
+    const file = u.pathname.split("/").pop() ?? "";
+    if (file.startsWith("security_top")) return "/tissam/security_top.jpg";
+    if (file.startsWith("tissam_flowchart")) return "/tissam/tissam_flowchart.png";
+    if (file.startsWith("tissam_project")) return "/tissam/tissam_project.jpg";
+    if (file.startsWith("tissam_atg")) return "/tissam/tissam_atg.jpg";
+    if (file.startsWith("tissam_senstar")) return "/tissam/tissam_senstar.jpg";
+    if (file.startsWith("tissam_indigo")) return "/tissam/tissam_indigo.jpg";
+    return undefined;
+  } catch {
+    return undefined;
+  }
 }
 
 function mapTokaiAboutUsImageUrl(url: string): string | undefined {
