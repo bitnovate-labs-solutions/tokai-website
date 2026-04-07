@@ -8,6 +8,8 @@ import { CSR_ARTICLE_UIDS } from "@/lib/csr-articles-fallback";
 import { TOKAI_PAGE_UIDS } from "@/lib/tokai-fallback-pages";
 
 export const revalidate = 60;
+// Allow rendering Prismic pages beyond the small set of pre-rendered fallback UIDs.
+export const dynamicParams = true;
 
 type Props = {
   params: Promise<{ uid: string }>;

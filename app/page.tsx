@@ -2,25 +2,23 @@ import type { Metadata } from "next";
 
 import { PrismicSliceZone } from "@/components/prismic-slice-zone";
 import { SiteChrome } from "@/components/site-chrome";
-import { defaultHomepageMeta } from "@/lib/default-homepage";
-import { getHomepage } from "@/lib/fetch-homepage";
+import {
+  defaultHomepageMeta,
+  defaultHomepageSlices,
+} from "@/lib/default-homepage";
 
-export const revalidate = 60;
+/** Homepage is authored in code (`lib/default-homepage.ts`), not loaded from Prismic. */
+export const dynamic = "force-static";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const page = await getHomepage();
-  return {
-    title: page.metaTitle ?? defaultHomepageMeta.title,
-    description: page.metaDescription ?? defaultHomepageMeta.description,
-  };
-}
+export const metadata: Metadata = {
+  title: defaultHomepageMeta.title,
+  description: defaultHomepageMeta.description,
+};
 
-export default async function HomePage() {
-  const page = await getHomepage();
-
+export default function HomePage() {
   return (
     <SiteChrome>
-      <PrismicSliceZone slices={page.slices} />
+      <PrismicSliceZone slices={defaultHomepageSlices} />
     </SiteChrome>
   );
 }

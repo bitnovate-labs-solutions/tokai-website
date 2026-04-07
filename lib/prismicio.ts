@@ -15,8 +15,9 @@ export function createClient(): prismic.Client {
     );
   }
 
+  const accessToken = process.env.PRISMIC_ACCESS_TOKEN;
   const client = prismic.createClient(repositoryName, {
-    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+    ...(accessToken ? { accessToken } : {}),
     routes: [
       { type: "homepage", path: "/" },
       { type: "page", path: "/:uid" },

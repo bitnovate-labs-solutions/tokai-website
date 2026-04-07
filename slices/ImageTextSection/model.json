@@ -38,8 +38,17 @@
           "type": "Image",
           "config": {
             "label": "Image",
-            "constraint": { "width": 2400, "height": 2400 },
+            "constraint": { "width": 1800, "height": 2600 },
             "thumbnails": []
+          }
+        },
+        "section_layout": {
+          "type": "Select",
+          "config": {
+            "label": "Section layout",
+            "placeholder": "",
+            "options": ["auto", "founder_portrait"],
+            "default_value": "auto"
           }
         },
         "video_url": {

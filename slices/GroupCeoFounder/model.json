@@ -1,0 +1,52 @@
+{
+  "id": "group_ceo_founder",
+  "type": "SharedSlice",
+  "name": "GroupCeoFounder",
+  "description": "Group CEO / Founder letter — dark section, portrait image column, name pill. Use this instead of Image + text for the CEO message on About us.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "",
+      "version": "initial",
+      "description": "",
+      "imageUrl": "",
+      "primary": {
+        "eyebrow": {
+          "type": "Text",
+          "config": {
+            "label": "Eyebrow (optional)",
+            "placeholder": ""
+          }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "Group CEO / Founder’s Message",
+            "allowTargetBlank": false,
+            "single": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,hyperlink,list-item,o-list-item"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Portrait photo",
+            "constraint": { "width": 1600, "height": 2400 },
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

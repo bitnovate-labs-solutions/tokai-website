@@ -31,7 +31,7 @@ const fadeUp = {
 export default function EditorialsHero({ slice }: SliceComponentProps) {
   const { primary } = slice as unknown as { primary: Primary };
   const sliceId = (slice as { id?: string }).id;
-  const videoSrc = primary.background_video_url?.trim() || "/editorials_hero.mp4";
+  const videoSrc = primary.background_video_url?.trim() || "/editorial_hero.mp4";
 
   const isCsrHero = primary.eyebrow?.trim().toUpperCase() === "CSR";
   /** Tighter bottom spacing before the next slice (e.g. Our Solutions parallax stack). */

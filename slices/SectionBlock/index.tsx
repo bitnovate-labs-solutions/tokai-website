@@ -24,6 +24,49 @@ function getParagraphTexts(field: RichTextField): string[] {
     .filter(Boolean);
 }
 
+/** Prismic may use list items or different block order; MVV copy still parses as plain lines. */
+function getMvvBodyLines(field: RichTextField): string[] {
+  const paragraphs = getParagraphTexts(field);
+  if (paragraphs.length >= 3) {
+    return paragraphs;
+  }
+  const full = asText(field ?? []).replace(/\u00a0/g, " ").trim();
+  if (!full) {
+    return paragraphs;
+  }
+  const byLabel = full
+    .split(/(?=Our\s+(?:Vision|Mission|Values)\s*:)/i)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (byLabel.length >= 3) {
+    return byLabel;
+  }
+  const byNl = full
+    .split(/\n+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return byNl.length >= paragraphs.length ? byNl : paragraphs;
+}
+
+function isOurMissionVisionValuesHeading(heading: string, sliceId?: string): boolean {
+  if (sliceId === "ab-mvv") {
+    return true;
+  }
+  const n = heading
+    .toLowerCase()
+    .replace(/[\u2018\u2019\u201c\u201d]/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (n === "our mission, vision and values") {
+    return true;
+  }
+  const hasMission = /\bmission\b/i.test(heading);
+  const hasVision = /\bvision\b/i.test(heading);
+  const hasValues = /\bvalues\b/i.test(heading);
+  const hasOur = /\bour\b/i.test(heading);
+  return hasOur && hasMission && hasVision && hasValues && heading.length < 120;
+}
+
 function parseMvvCards(paragraphs: string[]) {
   const cards = [];
   for (const p of paragraphs) {
@@ -101,6 +144,87 @@ function MvvCard({
   );
 }
 
+type MvvCardData = { label: string; text: string };
+
+/**
+ * `useScroll` must attach to a mounted element. Keeping it here avoids running
+ * useScroll when SectionBlock returns null (e.g. empty pair_cards) or for
+ * non-MVV variants — see https://motion.dev/troubleshooting/use-scroll-ref
+ */
+function MvvScrollSection({
+  primary,
+  mvvCards,
+  mvvExtra,
+}: {
+  primary: Primary;
+  mvvCards: MvvCardData[];
+  mvvExtra: string | null;
+}) {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start 0.9", "end 0.35"],
+  });
+
+  return (
+    <div ref={sectionRef}>
+      <MotionReveal>
+        <div className="max-w-3xl">
+          <SiteRichText field={primary.heading} variant="body" />
+        </div>
+      </MotionReveal>
+
+      <div className="mt-12 grid grid-cols-1 gap-6 md:mt-14 md:grid-cols-3 md:gap-8">
+        {mvvCards.map((card, idx) => (
+          <MvvCard
+            key={card.label}
+            label={card.label}
+            text={card.text}
+            index={idx}
+            progress={scrollYProgress}
+          />
+        ))}
+      </div>
+
+      {mvvExtra ? (
+        <MotionReveal delay={0.06}>
+          <div className="mt-10 max-w-3xl">
+            <motion.ul
+              className="space-y-3 text-base leading-relaxed text-zinc-700"
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-10% 0px" }}
+              variants={{
+                hidden: {},
+                show: { transition: { staggerChildren: 0.06 } },
+              }}
+            >
+              {splitIntoBullets(mvvExtra).map((item) => (
+                <motion.li
+                  key={item}
+                  className="flex gap-3"
+                  variants={{
+                    hidden: { opacity: 0, y: 10 },
+                    show: { opacity: 1, y: 0 },
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 240,
+                    damping: 26,
+                  }}
+                >
+                  <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-600/80" />
+                  <span>{item}</span>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
+        </MotionReveal>
+      ) : null}
+    </div>
+  );
+}
+
 type PairCardItem = {
   heading: RichTextField;
   body: RichTextField;
@@ -132,9 +256,11 @@ export default function SectionBlock({ slice }: SliceComponentProps) {
     ) ?? [];
   const sliceId = (slice as { id?: string }).id;
   const headingText = (asText(primary.heading ?? []) ?? "").trim();
-  const isMvv = headingText.toLowerCase() === "our mission, vision and values";
+  const isMvv = isOurMissionVisionValuesHeading(headingText, sliceId);
   const isCsrOverview = sliceId === "csr-overview" && !isMvv;
-  const paragraphs = getParagraphTexts(primary.body ?? []);
+  const paragraphs = isMvv
+    ? getMvvBodyLines(primary.body ?? [])
+    : getParagraphTexts(primary.body ?? []);
   const mvvCards = useMemo(
     () => (isMvv ? parseMvvCards(paragraphs) : []),
     [isMvv, paragraphs],
@@ -143,12 +269,6 @@ export default function SectionBlock({ slice }: SliceComponentProps) {
     isMvv && paragraphs.length > 3
       ? paragraphs.filter((p) => !/^(Our\s+Vision|Our\s+Mission|Our\s+Values)\s*:/i.test(p)).slice(-1)[0]
       : null;
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    // Start animating when the grid approaches viewport, finish near the end.
-    offset: ["start 0.9", "end 0.35"],
-  });
 
   const csrIntroVariants = {
     hidden: {},
@@ -211,7 +331,7 @@ export default function SectionBlock({ slice }: SliceComponentProps) {
         </>
       ) : null}
       <div className="mx-auto max-w-[1400px] px-4 py-16 md:px-8 md:py-20">
-        <div ref={sectionRef}>
+        <div>
           {isPairCards ? (
             isScopeDrawerGrid ? (
               <ElpScopeDrawerCards
@@ -273,63 +393,11 @@ export default function SectionBlock({ slice }: SliceComponentProps) {
               </motion.div>
             )
           ) : isMvv ? (
-            <div>
-            <MotionReveal>
-              <div className="max-w-3xl">
-                <SiteRichText field={primary.heading} variant="body" />
-              </div>
-            </MotionReveal>
-
-            <div
-              className="mt-12 grid grid-cols-1 gap-6 md:mt-14 md:grid-cols-3 md:gap-8"
-            >
-              {mvvCards.map((card, idx) => (
-                <MvvCard
-                  key={card.label}
-                  label={card.label}
-                  text={card.text}
-                  index={idx}
-                  progress={scrollYProgress}
-                />
-              ))}
-            </div>
-
-            {mvvExtra ? (
-              <MotionReveal delay={0.06}>
-                <div className="mt-10 max-w-3xl">
-                  <motion.ul
-                    className="space-y-3 text-base leading-relaxed text-zinc-700"
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true, margin: "-10% 0px" }}
-                    variants={{
-                      hidden: {},
-                      show: { transition: { staggerChildren: 0.06 } },
-                    }}
-                  >
-                    {splitIntoBullets(mvvExtra).map((item) => (
-                      <motion.li
-                        key={item}
-                        className="flex gap-3"
-                        variants={{
-                          hidden: { opacity: 0, y: 10 },
-                          show: { opacity: 1, y: 0 },
-                        }}
-                        transition={{
-                          type: "spring",
-                          stiffness: 240,
-                          damping: 26,
-                        }}
-                      >
-                        <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-amber-600/80" />
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </motion.ul>
-                </div>
-              </MotionReveal>
-            ) : null}
-            </div>
+            <MvvScrollSection
+              primary={primary}
+              mvvCards={mvvCards}
+              mvvExtra={mvvExtra}
+            />
           ) : isCsrOverview ? (
             <motion.div
               className="relative max-w-3xl"

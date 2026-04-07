@@ -11,6 +11,7 @@ import CsrArticleGallery from "./CsrArticleGallery";
 import CsrArticleHero from "./CsrArticleHero";
 import CtaBand from "./CtaBand";
 import HeroSplit from "./HeroSplit";
+import GroupCeoFounder from "./GroupCeoFounder";
 import ImageTextSection from "./ImageTextSection";
 import SolutionParallax from "./SolutionParallax";
 import PageIntro from "./PageIntro";
@@ -41,5 +42,6 @@ export const sliceComponents = {
   csr_article_body: CsrArticleBody,
   csr_article_gallery: CsrArticleGallery,
   image_text_section: ImageTextSection,
+  group_ceo_founder: GroupCeoFounder,
   solution_parallax: SolutionParallax,
 };

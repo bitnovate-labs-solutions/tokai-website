@@ -92,6 +92,9 @@
             "image_text_section": {
               "type": "SharedSlice"
             },
+            "group_ceo_founder": {
+              "type": "SharedSlice"
+            },
             "solution_parallax": {
               "type": "SharedSlice"
             }

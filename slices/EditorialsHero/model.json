@@ -36,9 +36,9 @@
           "type": "Text",
           "config": {
             "label": "Background video URL (MP4)",
-            "placeholder": "/editorials_hero.mp4 or https://..."
+            "placeholder": "/editorial_hero.mp4 or https://..."
           }
-        },
+        }
       },
       "items": {}
     }

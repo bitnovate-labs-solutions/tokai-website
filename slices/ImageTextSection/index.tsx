@@ -1,6 +1,7 @@
 "use client";
 
 import type { ImageField, RichTextField, KeyTextField } from "@prismicio/client";
+import { asText } from "@prismicio/client";
 import {
   PrismicLink,
   PrismicRichText,
@@ -8,10 +9,12 @@ import {
 } from "@prismicio/react";
 import type { RichTextComponents } from "@prismicio/react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 
 import { MotionReveal } from "@/components/motion-reveal";
 import { SiteRichText } from "@/components/prismic-rich";
+import { resolveSliceImageUrl } from "@/lib/resolve-slice-image-url";
 
 const exoDiagramLineVariants = {
   hidden: { opacity: 0, y: 12 },
@@ -66,77 +69,30 @@ type Primary = {
   heading: RichTextField;
   body: RichTextField;
   image?: ImageField;
+  /** From Slice Machine `section_layout` — `founder_portrait` forces dark + tall portrait shell. */
+  section_layout?: string | null;
   /** Local path or URL to MP4; when set, video replaces the image column. */
   video_url?: KeyTextField;
   /** Plain caption under the image column (e.g. Exothermic benefits layout). */
   image_caption?: KeyTextField;
 };
 
-function mapTokaiAboutUsImageUrl(url?: string): string | undefined {
-  if (!url) return undefined;
-
-  // Tokai's Prismic content sometimes references the original site assets.
-  // We download those assets into `public/about-us/` so rendering is
-  // reliable even if the external host blocks hotlinking or remote fetches.
-  const filename = (() => {
-    try {
-      const u = new URL(url);
-      const host = u.hostname.replace(/^www\./, "");
-      if (host !== "tokai.com.my") return null;
-      return u.pathname.split("/").pop() ?? null;
-    } catch {
-      return null;
-    }
-  })();
-
-  if (
-    filename === "what.jpg" ||
-    filename === "who.jpg" ||
-    filename === "where.jpg" ||
-    filename === "dato.png" ||
-    filename === "28_years.png"
-  ) {
-    return `/about-us/${filename}`;
-  }
-
-  return undefined;
+/** Collapse Prismic/asText quirks (NBSP, zero-width, dash variants) so fingerprint `includes` works. */
+function normalizeRichTextPlain(raw: string): string {
+  return raw
+    .toLowerCase()
+    .replace(/\u00a0/g, " ")
+    .replace(/[\u200b-\u200d\ufeff]/g, "")
+    .replace(/[\u2013\u2014\u2212]/g, "-")
+    .replace(/[\u2018\u2019\u201a\u201b]/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
-/** Map legacy WordPress E&LP assets to `public/elp-solutions/` (hotlink-safe). */
-function mapTokaiElpImageUrl(url?: string): string | undefined {
-  if (!url) return undefined;
-  try {
-    const u = new URL(url);
-    if (u.hostname.replace(/^www\./, "") !== "tokai.com.my") return undefined;
-    const path = u.pathname;
-    if (path.includes("elp_top")) return "/elp-solutions/elp_top.jpg";
-    if (path.includes("elp_product")) return "/elp-solutions/elp_product.jpg";
-    if (path.includes("contact.png")) return "/elp-solutions/contact.png";
-    return undefined;
-  } catch {
-    return undefined;
-  }
-}
-
-/** Legacy WordPress E&LP Services assets → `public/elp-services/`. */
-function mapTokaiElpServicesImageUrl(url?: string): string | undefined {
-  if (!url) return undefined;
-  try {
-    const u = new URL(url);
-    if (u.hostname.replace(/^www\./, "") !== "tokai.com.my") return undefined;
-    const file = u.pathname.split("/").pop() ?? "";
-    if (file.startsWith("services_top")) return "/elp-services/services_top.jpg";
-    if (file.startsWith("services_mid")) return "/elp-services/services_mid.png";
-    if (file.startsWith("cathodic")) return "/elp-services/cathodic.jpg";
-    if (file.startsWith("shield")) return "/elp-services/shield.png";
-    if (file.startsWith("sitesurvey")) return "/elp-services/elp-card-site-survey.jpg";
-    if (file.startsWith("design")) return "/elp-services/elp-card-design.jpg";
-    if (file.startsWith("install")) return "/elp-services/elp-card-installation.jpg";
-    if (file.startsWith("training")) return "/elp-services/elp-card-training.jpg";
-    return undefined;
-  } catch {
-    return undefined;
-  }
+/** Filename segment only (no query/hash) — works for absolute URLs and `/path` style. */
+function pathBasenameLower(url: string): string {
+  const clean = url.split("?")[0]?.split("#")[0] ?? "";
+  return (clean.split("/").pop() ?? "").toLowerCase();
 }
 
 function isAboutUsTrioSlice(sliceId: string | undefined, resolvedUrl?: string) {
@@ -144,7 +100,12 @@ function isAboutUsTrioSlice(sliceId: string | undefined, resolvedUrl?: string) {
     return true;
   }
   if (!resolvedUrl) return false;
-  return /\/(what|who|where)\.jpg$/i.test(resolvedUrl);
+  const base = pathBasenameLower(resolvedUrl);
+  return (
+    base === "what.jpg" ||
+    base === "who.jpg" ||
+    base === "where.jpg"
+  );
 }
 
 const SOLUTIONS_PILLAR_IDS = ["os-elp", "os-esp", "os-tbat", "os-tissam"] as const;
@@ -213,23 +174,78 @@ const aboutTrioTextBlockVariants = {
   },
 };
 
-export default function ImageTextSection({ slice }: SliceComponentProps) {
+/** Fallback JSON order on about-us: hero=0, what/who/where=1–3, founder=4. */
+const ABOUT_US_FOUNDER_SLICE_INDEX = 4;
+
+export default function ImageTextSection({
+  slice,
+  index,
+}: SliceComponentProps) {
+  const pathname = usePathname();
   const { primary } = slice as unknown as { primary: Primary };
   const sliceId = (slice as { id?: string }).id;
-  const variation = (slice as { variation?: string }).variation;
+  const variationRaw = (slice as { variation?: string }).variation;
+  const variation = (variationRaw ?? "default").toLowerCase();
   const img = primary.image;
-  const resolvedImgUrl =
-    mapTokaiAboutUsImageUrl(img?.url ?? undefined) ??
-    mapTokaiElpImageUrl(img?.url ?? undefined) ??
-    mapTokaiElpServicesImageUrl(img?.url ?? undefined) ??
-    img?.url ??
-    undefined;
+  const resolvedImgUrl = resolveSliceImageUrl(img?.url ?? undefined);
+  const altLower = (img?.alt ?? "").toLowerCase();
+  const urlLower = (resolvedImgUrl ?? "").toLowerCase();
+  const headingRaw = asText(primary.heading ?? []);
+  const headingPlain = headingRaw
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u2018\u2019\u201a\u201b\u2032\u2035]/g, "'");
+  /** Plain text for layout heuristics — avoid NFKD on full body (can break substring checks); normalize spaces/dashes instead. */
+  const bodyPlain = normalizeRichTextPlain(asText(primary.body ?? []));
+  /**
+   * Prismic editors often use different punctuation or shorten titles; images may be
+   * renamed on CDN with no "dato" in the URL. Heading/body fingerprints catch that.
+   */
+  const isFounderByHeading =
+    (headingPlain.includes("founder") && headingPlain.includes("message")) ||
+    (headingPlain.includes("group ceo") && headingPlain.includes("founder")) ||
+    (headingPlain.includes("group ceo") && headingPlain.includes("message")) ||
+    /^group\s+ceo\s*\//i.test(headingRaw.trim());
+  const isFounderByBody =
+    bodyPlain.includes("thank you for visiting our website") ||
+    (bodyPlain.includes("thank you for visiting") &&
+      bodyPlain.includes("our website")) ||
+    bodyPlain.includes("humble 2 man trading company") ||
+    (bodyPlain.includes("humble 2 man") && bodyPlain.includes("coffeeshop")) ||
+    bodyPlain.includes("rented office lot above a coffeeshop") ||
+    (bodyPlain.includes("bandar sunway") && bodyPlain.includes("coffeeshop")) ||
+    (bodyPlain.includes("preferred solutions provider") &&
+      bodyPlain.includes("lightning") &&
+      bodyPlain.includes("security"));
+  const layoutKey = (primary.section_layout ?? "auto").toLowerCase().trim();
+  const isFounderByPrismicLayout = layoutKey === "founder_portrait";
+  /** Best-effort when slice order matches `tokai-fallback-pages` about-us (founder is 5th slice). */
+  const isFounderByAboutUsIndex =
+    pathname === "/about-us" &&
+    index === ABOUT_US_FOUNDER_SLICE_INDEX &&
+    variation !== "full_width_video";
+  /** Fallback JSON uses id `ab-founder` / local `/about-us/dato.png`. Prismic uses CDN URLs + often random slice ids — detect founder portrait from alt/URL too. */
   const isFounderPortrait =
+    isFounderByPrismicLayout ||
+    isFounderByAboutUsIndex ||
+    sliceId === "ab-founder" ||
+    isFounderByHeading ||
+    isFounderByBody ||
     resolvedImgUrl === "/about-us/dato.png" ||
-    resolvedImgUrl?.endsWith("/dato.png") === true;
+    resolvedImgUrl?.endsWith("/dato.png") === true ||
+    altLower.includes("dato ir") ||
+    altLower.includes("jimmy lim") ||
+    (urlLower.includes("dato") &&
+      /\.(png|jpe?g|webp)(\?|#|$)/i.test(resolvedImgUrl ?? ""));
+  /** Same for 28-years graphic: Prismic filenames often still contain `28_years` or similar. */
   const is28YearsImage =
+    sliceId === "ab-model" ||
     resolvedImgUrl === "/about-us/28_years.png" ||
-    resolvedImgUrl?.endsWith("/28_years.png") === true;
+    resolvedImgUrl?.endsWith("/28_years.png") === true ||
+    urlLower.includes("28_years") ||
+    urlLower.includes("28years") ||
+    altLower.includes("28 years") ||
+    altLower.includes("28_years");
   const isSolutionsPillar = isSolutionsPillarSlice(sliceId);
   const isSolutionsTop = sliceId === "os-top" || sliceId === "elp-top";
   const videoSrc = primary.video_url?.trim();

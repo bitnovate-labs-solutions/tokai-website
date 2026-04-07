@@ -19,7 +19,7 @@ export function buildEditorialsPageSlices(): unknown[] {
         heading: h1("Editorials"),
         subheading:
           "Engineering editorials and design guidance on lightning risk, surge protection, and keeping people safe in Malaysia’s tropical climate.",
-        background_video_url: "/editorials_hero.mp4",
+        background_video_url: "/editorial_hero.mp4",
       },
       items: [],
     },

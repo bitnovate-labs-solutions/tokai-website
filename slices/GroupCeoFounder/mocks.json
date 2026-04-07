@@ -1,0 +1,59 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "eyebrow": {
+        "__TYPE__": "FieldContent",
+        "value": "",
+        "type": "Text"
+      },
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Group CEO / Founder’s Message"
+            }
+          }
+        ]
+      },
+      "body": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Thank you for visiting our website. Over the years, Tokai has evolved from a humble 2 man trading company operating from a rented office lot above a coffeeshop in Bandar Sunway to what it is today."
+            }
+          }
+        ]
+      },
+      "image": {
+        "origin": {
+          "id": "main",
+          "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+          "width": 4000,
+          "height": 6000
+        },
+        "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&h=2400&fit=crop",
+        "width": 1600,
+        "height": 2400,
+        "edit": {
+          "zoom": 1,
+          "crop": {
+            "x": 0,
+            "y": 0
+          },
+          "background": "transparent"
+        },
+        "alt": "Dato Ir. Jimmy Lim Lai Ho",
+        "credits": null,
+        "__TYPE__": "ImageContent",
+        "thumbnails": {}
+      }
+    },
+    "items": []
+  }
+]

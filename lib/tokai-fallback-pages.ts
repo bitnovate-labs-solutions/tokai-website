@@ -999,7 +999,7 @@ const pages: Record<string, Omit<PagePayload, "slices"> & { slices: unknown[] }>
           items: [],
         },
         {
-          slice_type: "image_text_section",
+          slice_type: "group_ceo_founder",
           id: "ab-founder",
           variation: "default",
           version: "initial",
